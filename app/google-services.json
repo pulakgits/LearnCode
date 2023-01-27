@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "162024723400",
+    "project_id": "quizo-24043",
+    "storage_bucket": "quizo-24043.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:162024723400:android:1bd8808585d8c59febe6fd",
+        "android_client_info": {
+          "package_name": "com.basetechz.quizo"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "162024723400-afqnc5sl14jhhqgjcobllnee8vrpvkqq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCjtU22iOCratMhk-5iOU0DkVsZyFHz9cc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "162024723400-afqnc5sl14jhhqgjcobllnee8vrpvkqq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

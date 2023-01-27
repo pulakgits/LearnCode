@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity"
+    android:background="#FCEFEDEC"
+    android:orientation="vertical">
+
+
+
+
+    <LinearLayout
+        android:id="@+id/action_bar"
+        android:background="@drawable/tool_bar_up_background"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:weightSum="4"
+        android:paddingStart="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_8sdp"
+        android:paddingTop="@dimen/_3sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:elevation="@dimen/_8sdp"
+        android:gravity="center">
+        <LinearLayout
+            android:id="@+id/toolBar"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_2sdp"
+            android:paddingEnd="@dimen/_2sdp"
+            android:gravity="center">
+            <ImageView
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:background="@drawable/app_icon" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_35sdp"
+                android:layout_gravity="center"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:fontFamily="@font/montserrat_bold"
+                android:gravity="center"
+                android:text="@string/quizo"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_20sdp"
+                android:textStyle="bold" />
+            <LinearLayout
+                android:id="@+id/actionMenuLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_25sdp"
+                android:orientation="horizontal"
+                android:gravity="center">
+                <ImageView
+                    android:layout_width="@dimen/_29sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:background="@drawable/action_menu"
+                    android:layout_marginLeft="@dimen/_160sdp"
+
+                    />
+
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/content"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_530sdp"
+        android:layout_above="@+id/bottomNavigationBar"
+        android:layout_below="@+id/action_bar"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp" />
+
+    <LinearLayout
+        android:id="@+id/bottomNavigationBar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_55sdp"
+        android:orientation="horizontal"
+        android:weightSum="4"
+        android:paddingStart="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_5sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp"
+        android:elevation="@dimen/_5sdp"
+        android:gravity="center"
+        android:background="@drawable/bottom_bar_bg"
+        android:layout_alignParentBottom="true"
+        android:baselineAligned="false">
+
+            <LinearLayout
+                android:id="@+id/homeLayout"
+                android:layout_width="@dimen/_43sdp"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_weight="1"
+                android:background="@drawable/round_back_home_100"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:paddingStart="@dimen/_4sdp"
+                android:paddingEnd="@dimen/_4sdp">
+
+                <ImageView
+                    android:id="@+id/homeImage"
+                    android:layout_width="@dimen/_19sdp"
+                    android:layout_height="@dimen/_19sdp"
+                    android:background="@drawable/home_selected_icon"
+                    android:contentDescription="@string/todos" />
+
+                <TextView
+                    android:id="@+id/homeTxt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_4sdp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="@string/homes"
+                    android:textColor="@color/home"
+                    android:textSize="@dimen/_11sdp" />
+            </LinearLayout>
+        <LinearLayout
+            android:id="@+id/rankLayout"
+            android:background="@android:color/transparent"
+            android:layout_width="@dimen/_43sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_4sdp"
+            android:gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/rankImage"
+                android:layout_width="@dimen/_19sdp"
+                android:layout_height="@dimen/_19sdp"
+                android:background="@drawable/rank_icon"/>
+            <TextView
+                android:id="@+id/rankTxt"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rank"
+                android:textColor="@color/rank"
+                android:textSize="@dimen/_11sdp"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_marginStart="@dimen/_4sdp"
+                android:textStyle="bold"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/walletLayout"
+            android:background="@android:color/transparent"
+            android:layout_width="@dimen/_43sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_4sdp"
+            android:gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/walletImage"
+                android:layout_width="@dimen/_19sdp"
+                android:layout_height="@dimen/_19sdp"
+                android:background="@drawable/wallet_icon"/>
+            <TextView
+                android:id="@+id/walletTxt"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/wallet"
+                android:textColor="@color/wallet"
+                android:textSize="@dimen/_11sdp"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_marginStart="@dimen/_4sdp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/profileLayout"
+            android:background="@android:color/transparent"
+            android:layout_width="@dimen/_43sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:orientation="horizontal"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_4sdp"
+            android:gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/profileImage"
+                android:layout_width="@dimen/_19sdp"
+                android:layout_height="@dimen/_19sdp"
+                android:background="@drawable/profile_icons"/>
+            <TextView
+                android:id="@+id/profileTxt"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/profile"
+                android:textColor="@color/profile"
+                android:textSize="@dimen/_11sdp"
+                android:fontFamily="@font/montserrat_bold"
+                android:layout_marginStart="@dimen/_4sdp" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>
