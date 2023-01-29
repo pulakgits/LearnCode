@@ -6,14 +6,13 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.LinearSnapHelper;
 
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.basetechz.quizo.databinding.FragmentQuizBinding;
+import com.basetechz.quizo.databinding.FragmentExploreBinding;
+import com.basetechz.quizo.databinding.FragmentExploreBinding;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -24,10 +23,10 @@ import java.util.ArrayList;
 
 
 
-public class QuizFragment extends Fragment  {
+public class ExploreFragment extends Fragment  {
 
 
-    public QuizFragment() {
+    public ExploreFragment() {
         // Required empty public constructor
     }
 
@@ -36,7 +35,7 @@ public class QuizFragment extends Fragment  {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
     }
-    FragmentQuizBinding binding;
+    FragmentExploreBinding binding;
     FirebaseFirestore database;
     LinearLayoutManager layoutManager1;
     LinearLayoutManager layoutManager2;
@@ -46,16 +45,11 @@ public class QuizFragment extends Fragment  {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        binding = FragmentQuizBinding.inflate(inflater,container,false);
+        binding = FragmentExploreBinding.inflate(inflater,container,false);
         database = FirebaseFirestore.getInstance();
 
         // array list for category
         ArrayList<CategoryModel> categories = new ArrayList<>();
-
-
-
-
-
 
 
         // Manually set image and text
@@ -70,8 +64,6 @@ public class QuizFragment extends Fragment  {
         boolean includeEdge = true;
         binding.categoryList2.addItemDecoration(new GridSpacingItemDecoration(spanCount, spacing, includeEdge));
         binding.categoryList2.setLayoutManager(layoutManager2);
-
-
 
 
         // database connect (store data in fire base )

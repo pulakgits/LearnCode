@@ -25,7 +25,6 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter<RecyclerCatego
     RecyclerCategoryAdapter(Context context,ArrayList<CategoryModel> categories){
         this.context = context;
         this.categories=categories;
-
     }
 
 
@@ -50,15 +49,16 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter<RecyclerCatego
 //       holder.imgCategory.setImageResource(categories.get(position).getCategoryImage());
 
         String categoryImage;
-       categoryImage = categoryModel.getCategoryImage();
+        categoryImage = categoryModel.getCategoryImage();
         Picasso.get().load(categoryImage).into(holder.imgCategory);
         holder.txtCategory.setText(categoryModel.getCategoryName());
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context,QuizActivity.class);
+                Intent intent = new Intent(context,CategoryPartActivity.class);
                 intent.putExtra("catId",categoryModel.getCategoryId());
+                intent.putExtra("categoryName",categoryModel.getCategoryName());
                 context.startActivity(intent);
             }
         });
@@ -78,7 +78,6 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter<RecyclerCatego
             super(itemView);
             txtCategory = itemView.findViewById(R.id.txtCategory);
             imgCategory = itemView.findViewById(R.id.imgCategory);
-
 
 
         }

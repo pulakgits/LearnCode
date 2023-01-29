@@ -1,4 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <item android:id="@+id/optLearnCodePro"
+        android:title="@string/learnCode_pro"
+        android:icon="@drawable/pro" />
+    <item android:id="@+id/optWallet"
+        android:title="@string/wallet"
+        android:icon="@drawable/wallet_icon" />
+    <item android:id="@+id/optLeaderboard"
+        android:title="@string/leaderboard"
+        android:icon="@drawable/leadboard_icon"/>
+    <item android:id="@+id/optInvite"
+        android:title="@string/invite_friends"
+        android:icon="@drawable/ic_baseline_person_add_24"/>
+    <item android:id="@+id/optsetting"
+        android:title="@string/setting"
+        android:icon="@drawable/ic_baseline_settings_24"/>
+
 </menu>

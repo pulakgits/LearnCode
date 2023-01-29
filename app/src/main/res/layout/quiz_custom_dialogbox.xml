@@ -2,34 +2,23 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_gravity="center"
+    android:layout_height="@dimen/_150sdp"
     android:gravity="center">
 
 
-
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:text="@string/keep_quizzing"
+            android:text="@string/are_you_quit_this_quiz"
             android:layout_gravity="center"
             android:gravity="center"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_14sdp"
-            android:fontFamily="@font/montserrat_bold">
-        </TextView>
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="@string/successfully_solve_this_quizes_keep_quizzing"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:layout_marginTop="@dimen/_7sdp"
-            android:textColor="@color/black"
-            android:textSize="@dimen/_10sdp">
+            style="@style/diaBoxTxt"
+            android:textSize="@dimen/_17sdp">
         </TextView>
 
         <LinearLayout
@@ -54,7 +43,7 @@
                 android:layout_height="@dimen/_40sdp"
                 android:layout_gravity="center"
                 android:layout_margin="@dimen/_8sdp"
-                android:background="@drawable/yesbtn_dialog"
+                android:background="@drawable/nobtn_dialog"
                 android:fontFamily="@font/montserrat_bold"
                 android:gravity="center"
                 android:text="@string/no"
@@ -67,7 +56,7 @@
                 android:layout_width="@dimen/_120sdp"
                 android:layout_height="@dimen/_40sdp"
                 android:layout_margin="@dimen/_8sdp"
-                android:background="@drawable/nobtn_dialog"
+                android:background="@drawable/yesbtn_dialog"
                 android:gravity="center"
                 android:layout_gravity="center"
                 android:textColor="@color/white"
@@ -79,5 +68,9 @@
 
 
 
+        </LinearLayout>
+
     </LinearLayout>
+
+
 </LinearLayout>

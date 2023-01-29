@@ -6,7 +6,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".ProfileFragment"
     android:orientation="vertical"
-    android:background="@color/grey">
+    style="@style/mainBg">
 
     <androidx.cardview.widget.CardView
         android:layout_width="@dimen/_100sdp"
@@ -77,7 +77,7 @@
         android:id="@+id/updateBtn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/rectangular_rounded_box_2"
+       style="@style/nextBtn"
         android:padding="@dimen/_12sdp"
         android:layout_marginStart="@dimen/_12sdp"
         android:layout_marginEnd="@dimen/_12sdp"

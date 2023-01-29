@@ -1,18 +1,25 @@
 package com.basetechz.quizo;
 
+import android.net.Uri;
+
 public class User {
-    private String name,email,pass,referCode;
+    private String name,email,pass,image;
+    private long coins;
 
     public User(){
 
     }
 
-    public User(String name, String email, String pass, String referCode) {
+    public User(String name,String email,String pass,String image,long coins){
         this.name = name;
         this.email = email;
-        this.pass = pass;
-        this.referCode = referCode;
+        this.pass=pass;
+        this.image=image;
+        this.coins=coins;
+
     }
+
+
 
 
     public String getName() {
@@ -31,6 +38,7 @@ public class User {
         this.email = email;
     }
 
+
     public String getPass() {
         return pass;
     }
@@ -39,11 +47,20 @@ public class User {
         this.pass = pass;
     }
 
-    public String getReferCode() {
-        return referCode;
+    public String getImage() {
+        return image;
     }
 
-    public void setReferCode(String referCode) {
-        this.referCode = referCode;
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+
+    public long getCoins() {
+        return coins;
+    }
+
+    public void setCoins(long coins) {
+        this.coins = coins;
     }
 }

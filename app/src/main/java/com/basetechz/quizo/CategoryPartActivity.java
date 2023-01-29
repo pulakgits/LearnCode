@@ -1,37 +1,93 @@
 package com.basetechz.quizo;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.view.WindowManager;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.basetechz.quizo.databinding.ActivityCategoryPartBinding;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+
+import java.util.ArrayList;
 
 public class CategoryPartActivity extends AppCompatActivity {
 
-    private ActivityCategoryPartBinding binding;
-
+   ActivityCategoryPartBinding binding;
+    FirebaseFirestore database;
+    RecyclerCategoryPartAdapter adapterPart;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = ActivityCategoryPartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        BottomNavigationView navView = findViewById(R.id.nav_view);
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
-                .build();
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_category_part);
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-        NavigationUI.setupWithNavController(binding.navView, navController);
+
+
+        database = FirebaseFirestore.getInstance();
+
+        // when click back icon backCategoryPart from Explore
+        binding.categoryName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
+
+        // array list for categoryPart
+        ArrayList<CategoryPartModel> categoriesPart = new ArrayList<>();
+        
+        
+        // pass context and categories to
+        //RecyclerCategoryAdapter
+
+
+        
+
+        // set Linear Layout Manager
+        LinearLayoutManager layoutManagerP = new LinearLayoutManager(CategoryPartActivity.this, LinearLayoutManager.VERTICAL, false);
+        binding.categoryListPart.setLayoutManager(layoutManagerP);
+
+
+        // get category Name from RecyclerCategoryAdapter and setText
+        String categoryName = getIntent().getStringExtra("categoryName");
+        binding.categoryName.setText(categoryName);
+        // get category id from RecyclerCategoryAdapter
+        Intent intent = getIntent();
+        final String catId = intent.getStringExtra("catId");
+
+        database.collection("categories")
+                .document(catId)
+                .collection("categoriesPart")
+                .addSnapshotListener((value, error) -> {
+                    categoriesPart.clear();
+
+                    assert value != null;
+                    for(DocumentSnapshot snapshot : value.getDocuments()){
+
+                        // snapshot.toObject convert object to CategoryModel
+                        // because in CloudFireStore we put field name is equal to CategoryModel variable
+                        CategoryPartModel model = snapshot.toObject(CategoryPartModel.class);
+
+                        //attach document id to CategoryModel Object
+                        assert model != null;
+                        model.setCategoryPartId(snapshot.getId());
+                        categoriesPart.add(model);
+                    }
+                    adapterPart.notifyDataSetChanged();
+                });
+        adapterPart = new RecyclerCategoryPartAdapter(CategoryPartActivity.this,categoriesPart,catId);
+        binding.categoryListPart.setAdapter(adapterPart);
+
+
     }
 
 }

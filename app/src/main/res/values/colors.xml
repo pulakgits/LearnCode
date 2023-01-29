@@ -6,28 +6,41 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="grey">#FCE3E1E0</color>
+    <color name="grey">#FCF2F0EF</color>
+    <color name="purple"> #7E3FF2</color>
     <color name="categoryPurple">#7333E2</color>
     <color name="quizLayoutBg">#F8ED91</color>
 
-
+    <color name="deepRed">#AB0940</color>
 
     <color name="darkOrange">#FF5722</color>
     <color name="orange">#FFC107</color>
-    <color name="colorPurple">#7032DC</color>
-    <color name="colorBlue">#3F51B5</color>
+    <color name="colorPurple">#556CED</color>
+    <color name="colorBlue">#033BE6</color>
     <color name="shadow_color">#FFC107</color>
 
-    <color name="home">#1194AA</color>
-    <color name="rank">#C9379D</color>
-    <color name="wallet">#1E7E0F</color>
-    <color name="profile">#5B37B7</color>
+    <color name="blueSky">#09FBD7</color>
+    <color name="Sky">#03A9F4</color>
+    <color name="appColor">#673AB7</color>
 
-    <color name="home_20">#331194AA</color>
-    <color name="rank_20">#33C9379D</color>
-    <color name="wallet_20">#33AE7E0F</color>
-    <color name="profile_20">#335B37B7</color>
+    <color name="mc1">#E91E63</color>
+    <color name="mc2">#F44336</color>
 
+
+    <color name="favorite">#E91E63</color>
+    <color name="favorite1.0">@color/white</color>>
+    <color name="favorite2.0">#D7CCCC</color>
+    <color name="btn2.0">#E91E63</color>
+
+    <color name="home">@color/white</color>
+    <color name="rank">@color/white</color>
+    <color name="wallet">@color/white</color>
+    <color name="profile">@color/white</color>
+
+    <color name="lightColor">#191D20</color>
+    <color name="DarkViolet1.0">#191D20</color>
+    <color name="DarkViolet2.0">#15181D</color>
+    <color name="whiteDark">#9C9C9C</color>
 
 
 </resources>

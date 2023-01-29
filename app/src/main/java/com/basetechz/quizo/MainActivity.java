@@ -1,180 +1,376 @@
 package com.basetechz.quizo;
 
+import android.annotation.SuppressLint;
+import android.app.DownloadManager;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.ScaleAnimation;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.Switch;
+import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatDelegate;
+import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import com.basetechz.quizo.databinding.ActivityMainBinding;
+import com.bumptech.glide.Glide;
+//import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+//import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.squareup.picasso.Picasso;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
+    FirebaseAuth auth;
+   FirebaseFirestore database;
+   FirebaseDatabase db;
+    boolean nightMODE;
+    SharedPreferences sharedPreferences;
+    SharedPreferences.Editor editor;
+    int color;
+    int txtColor;
+    TextView switch_theme1;
+    DrawerLayout drawerLayout;
+    androidx.appcompat.widget.Toolbar toolBar;
+    GoogleSignInOptions gso;
+//    GoogleSignInClient gsc;
+    TextView name;
+    TextView email;
+    ImageView phoUrl;
+    User user;
+
+    FirebaseAuth mAuth;
 
     // number of selected tab we have 4 tabs so value must lie between 1-4 ,
     // default value is 1 because first tab selected by default.
-
+    @SuppressLint("ResourceAsColor")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        
+        switch_theme1 = findViewById(R.id.switch_theme1);
+        drawerLayout = findViewById(R.id.drawerLayout);
+        toolBar = findViewById(R.id.toolBar);
+        name = findViewById(R.id.name);
+        email = findViewById(R.id.email);
+        phoUrl = findViewById(R.id.photoUrl);
+        setSupportActionBar(toolBar);
+        mAuth = FirebaseAuth.getInstance();
 
+
+        // create ActionBarDrawerToggle object
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this,drawerLayout,toolBar,R.string.OpenDrawer,R.string.CloseDrawer);
+
+        // set drawableArrow 3 line color
+        toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
+
+
+
+
+
+
+
+
+        drawerLayout.addDrawerListener(toggle);
+        toggle.syncState();
+
+        binding.navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+
+                int id = item.getItemId();
+                switch (id){
+                    case R.id.optWallet:
+                        startActivity(new Intent(MainActivity.this,WalletActivity.class));
+                        break;
+                    case R.id.optLeaderboard:
+                        binding.toolBarText.setText("LeaderBoard");
+                        binding.leadTxt.setTextColor(color);
+                        binding.leadImage.setImageResource(R.drawable.leadboard_icon_select);
+                        binding.homeTxt.setTextColor(txtColor);
+                        binding.homeImage.setImageResource(R.drawable.home_icons);
+                       loadFragment(new LeaderboardFragment());
+                       break;
+
+                    case R.id.optInvite:
+
+                    case R.id.optsetting:
+                    case R.id.optLearnCodePro:
+
+                }
+
+                onBackPressed();
+
+                return true;
+            }
+        });
+
+
+
+
+
+
+
+
+
+
+        // night mode and light mode function
+//        sharedPreferences = getSharedPreferences("MODE", Context.MODE_PRIVATE);
+//        nightMODE = sharedPreferences.getBoolean("night", false);// light mode is the default mode
+//        switch_theme1 = findViewById(R.id.switch_theme1);
+//        if(nightMODE) {
+//            switch_theme1.setClickable(true);
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//        }else{
+//            switch_theme1.setClickable(false);
+//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//        }
+//        switch_theme1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if(nightMODE){
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+//                    editor = sharedPreferences.edit();
+//                    editor.putBoolean("night", false);
+//                }else {
+//                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+//                    editor = sharedPreferences.edit();
+//                    editor.putBoolean("night", true);
+//                }
+//                editor.apply();
+//            }
+//        });
+
+        color = Color.parseColor("#E91E63");
+        txtColor = Color.parseColor("#9C9C9C");
 
 
         // set home fragment by default
         // Its a Transaction fragment object
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .replace(R.id.content,HomeFragment.class,null)
-                .commit();
-
+        binding.homeTxt.setTextColor(color);
+        binding.homeImage.setImageResource(R.drawable.home_icons_select);
+        binding.homeLayout.setBackgroundResource(R.drawable.round_back_home_100);
 
 
         // homeLayout setOnClickListener
         binding.homeLayout.setOnClickListener(v -> {
+            binding.toolBarText.setText("Home");
 
             // set Home Fragment
-            getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .replace(R.id.content,HomeFragment.class,null)
-                .commit();
+
 
             // check if home Tab is selected or not
 
 
             // unselect other tab except home tab
-                binding.rankTxt.setVisibility(View.GONE);
-                binding.walletTxt.setVisibility(View.GONE);
-                binding.profileTxt.setVisibility(View.GONE);
 
-                binding.rankImage.setImageResource(R.drawable.rank_icon);
-                binding.walletImage.setImageResource(R.drawable.wallet_icon);
-                binding.profileImage.setImageResource(R.drawable.profile_icons);
+            binding.leadImage.setImageResource(R.drawable.leadboard_icon);
+            binding.leadTxt.setTextColor(txtColor);
+            binding.exploreImage.setImageResource(R.drawable.explore_icon);
+            binding.exploreTxt.setTextColor(txtColor);
 
-            for (LinearLayout linearLayout : Arrays.asList(binding.rankLayout, binding.walletLayout, binding.profileLayout))
+            binding.profileTxt.setTextColor(txtColor);
+
+            for (LinearLayout linearLayout : Arrays.asList(binding.leadLayout, binding.exploreLayout, binding.profileLayout))
                 linearLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
             // select home Tab
-                binding.homeTxt.setVisibility(View.VISIBLE);
-                binding.homeImage.setImageResource(R.drawable.home_selected_icon);
-                binding.homeLayout.setBackgroundResource(R.drawable.round_back_home_100);
 
-                // create animation
-                ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f,1.0f,1f,1f,Animation.RELATIVE_TO_SELF,0.0f, Animation.RELATIVE_TO_SELF,0.0f);
-                scaleAnimation.setDuration(200);
-                scaleAnimation.setFillAfter(true);
-                binding.homeLayout.startAnimation(scaleAnimation);
+            binding.homeTxt.setTextColor(color);
+            binding.homeImage.setImageResource(R.drawable.home_icons_select);
+            binding.homeLayout.setBackgroundResource(R.drawable.round_back_home_100);
+
+            // create animation
+
         });
-        binding.rankLayout.setOnClickListener(v -> {
+
+        binding.leadLayout.setOnClickListener(v -> {
+            binding.toolBarText.setText("LeaderBoard");
+
+            // set Explore Fragment
+            loadFragment(new LeaderboardFragment());
 
 
 
             // check if home Tab is selected or not
-
             // unselect other tab except home tab
-                binding.homeTxt.setVisibility(View.GONE);
-                binding.walletTxt.setVisibility(View.GONE);
-                binding.profileTxt.setVisibility(View.GONE);
+            binding.homeImage.setImageResource(R.drawable.home_icons);
+            binding.homeTxt.setTextColor(txtColor);
+            binding.exploreImage.setImageResource(R.drawable.explore_icon);
+            binding.exploreTxt.setTextColor(txtColor);
 
-                binding.homeImage.setImageResource(R.drawable.home_icon);
-                binding.walletImage.setImageResource(R.drawable.wallet_icon);
-                binding.profileImage.setImageResource(R.drawable.profile_icons);
+            binding.profileTxt.setTextColor(txtColor);
 
-                binding.homeLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                binding.walletLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                binding.profileLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            binding.homeLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            binding.exploreLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+            binding.profileLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
 
-                binding.rankTxt.setVisibility(View.VISIBLE);
-                binding.rankImage.setImageResource(R.drawable.rank_selected_icon);
-                binding.rankLayout.setBackgroundResource(R.drawable.round_back_rank_100);
+            binding.leadTxt.setTextColor(color);
+            binding.leadImage.setImageResource(R.drawable.leadboard_icon_select);
+            binding.leadLayout.setBackgroundResource(R.drawable.round_back_rank_100);
 
-                // create animation
-            ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f,1.0f,1f,1f,Animation.RELATIVE_TO_SELF,0.0f, Animation.RELATIVE_TO_SELF,0.0f);
-            scaleAnimation.setDuration(200);
-            scaleAnimation.setFillAfter(true);
-            binding.rankLayout.startAnimation(scaleAnimation);
+            // create animation
 
         });
-        binding.walletLayout.setOnClickListener(new View.OnClickListener() {
+
+        binding.exploreLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                binding.toolBarText.setText("Explore");
 
-                // set Wallet Fragment
-                getSupportFragmentManager().beginTransaction()
-                        .setReorderingAllowed(true)
-                        .replace(R.id.content,WalletFragment.class,null)
-                        .commit();
+                // set Explore Fragment
+                loadFragment(new ExploreFragment());
 
                 // check if home Tab is selected or not
 
                 // unselect other tab except home tab
-                    binding.homeTxt.setVisibility(View.GONE);
-                    binding.rankTxt.setVisibility(View.GONE);
-                    binding.profileTxt.setVisibility(View.GONE);
 
-                    binding.homeImage.setImageResource(R.drawable.home_icon);
-                    binding.rankImage.setImageResource(R.drawable.rank_icon);
-                    binding.profileImage.setImageResource(R.drawable.profile_icons);
 
-                    binding.homeLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                    binding.rankLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-                    binding.profileLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                binding.homeImage.setImageResource(R.drawable.home_icons);
+                binding.homeTxt.setTextColor(txtColor);
+                binding.leadImage.setImageResource(R.drawable.leadboard_icon);
+                binding.leadTxt.setTextColor(txtColor);
 
-                    binding.walletTxt.setVisibility(View.VISIBLE);
-                    binding.walletImage.setImageResource(R.drawable.wallet_selected_icon);
-                    binding.walletLayout.setBackgroundResource(R.drawable.round_back_wallet_100);
+                binding.profileTxt.setTextColor(txtColor);
 
+                binding.homeLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                binding.leadLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                binding.profileLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+                binding.exploreTxt.setTextColor(color);
+                binding.exploreImage.setImageResource(R.drawable.explore_icon_select);
+                binding.exploreLayout.setBackgroundResource(R.drawable.round_back_wallet_100);
                 // create animation
-                ScaleAnimation scaleAnimation = new ScaleAnimation(0.8f,1.0f,1f,1f,Animation.RELATIVE_TO_SELF,0.0f, Animation.RELATIVE_TO_SELF,0.0f);
-                scaleAnimation.setDuration(200);
-                scaleAnimation.setFillAfter(true);
-                binding.walletLayout.startAnimation(scaleAnimation);
             }
         });
-        binding.profileLayout.setOnClickListener(this::onClick);
+
+        binding.profileImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                binding.toolBarText.setText("Profile");
+                //set Profile Fragment
+                loadFragment(new ProfileFragment());
+
+                // unselect other tab except home tab
 
 
+                binding.homeImage.setImageResource(R.drawable.home_icons);
+                binding.homeTxt.setTextColor(txtColor);
+                binding.leadImage.setImageResource(R.drawable.leadboard_icon);
+                binding.leadTxt.setTextColor(txtColor);
+                binding.exploreImage.setImageResource(R.drawable.explore_icon);
+                binding.exploreTxt.setTextColor(txtColor);
+
+                binding.homeLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                binding.leadLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+                binding.exploreLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
+
+
+                binding.profileTxt.setTextColor(color);
+                binding.profileLayout.setBackgroundResource(R.drawable.round_back_profile_100);
+
+            }
+        });
+
+//        fetch data from database
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        db=FirebaseDatabase.getInstance();
+        database = FirebaseFirestore.getInstance();
+
+        database.collection("Users").document(currentUser.getUid()).get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+            @Override
+            public void onSuccess(DocumentSnapshot documentSnapshot) {
+                User user = documentSnapshot.toObject(User.class);
+                String personName = user.getName();
+                String personEmail = user.getEmail();
+
+                name.setText(personName);
+                email.setText(personEmail);
+                Glide.with(MainActivity.this).load(user.getImage()).into(phoUrl);
+                binding.coins.setText(String.valueOf(user.getCoins()));
+
+            }
+
+        });
+
+
+        // sign out
+        binding.signOutBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+               mAuth.signOut();
+               Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+               startActivity(intent);
+               finish();
+
+            }
+        });
     }
 
-    private void onClick(View v) {
-        //set Profile Fragment
-        getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .replace(R.id.content, ProfileFragment.class, null)
-                .commit();
-
-        // check if home Tab is selected or not
-
-        // unselect other tab except home tab
-        binding.homeTxt.setVisibility(View.GONE);
-        binding.rankTxt.setVisibility(View.GONE);
-        binding.walletTxt.setVisibility(View.GONE);
-
-        binding.homeImage.setImageResource(R.drawable.home_icon);
-        binding.rankImage.setImageResource(R.drawable.rank_icon);
-        binding.walletImage.setImageResource(R.drawable.wallet_icon);
-
-        binding.homeLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        binding.rankLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-        binding.walletLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
-
-        binding.profileTxt.setVisibility(View.VISIBLE);
-        binding.profileImage.setImageResource(R.drawable.profile_selected_icon);
-        binding.profileLayout.setBackgroundResource(R.drawable.round_back_profile_100);
-
-        // create animation
-        ScaleAnimation scaleAnimation = new ScaleAnimation(0.9f, 1.0f, 1f, 1f, Animation.RELATIVE_TO_SELF, 0.0f, Animation.RELATIVE_TO_SELF, 0.0f);
-        scaleAnimation.setDuration(200);
-        scaleAnimation.setFillAfter(true);
-        binding.profileLayout.startAnimation(scaleAnimation);
-
-
+    private void setDisplayHomeAsUpEnabled(boolean b) {
     }
+
+    @Override
+    public void onBackPressed() {
+        if(drawerLayout.isDrawerOpen(GravityCompat.START)){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }else{
+            super.onBackPressed();
+        }
+    }
+
+    private void loadFragment(Fragment fragment){
+        FragmentManager fm = getSupportFragmentManager();
+        FragmentTransaction ft = fm.beginTransaction();
+        ft.replace(R.id.content,fragment);
+        ft.setReorderingAllowed(true);
+        ft.commit();
+    }
+//     load profile image
+//    void loadProfileImage(){
+//        Glide.with(MainActivity.this).load(user.getImage()).into(binding.profileImage);
+//    }
 }
+
+

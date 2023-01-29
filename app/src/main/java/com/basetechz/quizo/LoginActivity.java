@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.basetechz.quizo.databinding.ActivityLoginBinding;
@@ -15,6 +16,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+
+import java.util.Objects;
 
 
 public class LoginActivity extends AppCompatActivity {
@@ -48,33 +51,39 @@ public class LoginActivity extends AppCompatActivity {
                             dialog.dismiss();
                             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                             startActivity(intent);
+                            finish();
                         }else{
-                            Toast.makeText(LoginActivity.this,task.getException().getLocalizedMessage(),Toast.LENGTH_SHORT);
+                            Toast.makeText(LoginActivity.this, Objects.requireNonNull(task.getException()).getLocalizedMessage(),Toast.LENGTH_SHORT).show();
                         }
 
                     }
                 });
 
-
             }
         });
-        binding.submitBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
-                finish();
-            }
-        });
+       binding.smBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+               finish();
+           }
+       });
 
-    }
-    @Override
-    protected void onStart() {
-        super.onStart();
-        // if user already sign app intent pass direct in the MainActivity
+       binding.skipBtn.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View v) {
+               startActivity(new Intent(LoginActivity.this,SignUpActivity.class));
+           }
+       });
+
+
         if(auth.getCurrentUser()!= null)
         {
             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
             startActivity(intent);
+            finish();
         }
+
     }
+
 }
