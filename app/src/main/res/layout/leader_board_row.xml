@@ -2,14 +2,16 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/_10sdp"
+   android:layout_marginTop="@dimen/_7sdp"
+    android:layout_marginBottom="@dimen/_7sdp"
+    android:layout_marginLeft="@dimen/_5sdp"
+    android:layout_marginRight="@dimen/_5sdp"
     app:cardCornerRadius="@dimen/_10sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <LinearLayout
         android:id="@+id/navView"
-        style="@style/mainBg"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -23,12 +25,11 @@
 
         <LinearLayout
             android:id="@+id/exploreLayout"
-            android:layout_width="119dp"
+            android:layout_width="@dimen/_70sdp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="@android:color/transparent"
-            android:gravity="center"
-            android:layout_gravity="center"
+
             android:orientation="vertical"
             android:paddingStart="@dimen/_4sdp"
             android:paddingEnd="@dimen/_4sdp">
@@ -40,14 +41,36 @@
 
                 <ImageView
                     android:id="@+id/personImg"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_70sdp"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_50sdp"
                     android:contentDescription="@string/todoooo" />
 
 
             </androidx.cardview.widget.CardView>
 
 
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/leadLayout"
+            android:layout_width="139dp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_weight="1.2"
+            android:background="@android:color/transparent"
+            android:orientation="vertical"
+            android:gravity="center_vertical"
+            android:paddingStart="@dimen/_4sdp"
+            android:paddingEnd="@dimen/_4sdp">
+
+
+            <TextView
+                android:id="@+id/personName"
+                style="@style/itemCatTxt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:fontFamily="@font/roboto_bold"
+                android:text="@string/user_name"
+                android:textSize="@dimen/_13sdp" />
         </LinearLayout>
 
         <LinearLayout
@@ -73,29 +96,7 @@
                 android:textSize="@dimen/_13sdp" />
         </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/leadLayout"
-            android:layout_width="146dp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_weight="1.2"
-            android:background="@android:color/transparent"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/_4sdp"
-            android:paddingEnd="@dimen/_4sdp">
 
-
-            <TextView
-                android:id="@+id/personName"
-                style="@style/itemCatTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:fontFamily="@font/roboto_bold"
-                android:gravity="center"
-                android:text="@string/user_name"
-                android:textSize="@dimen/_13sdp" />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/profileLayout"

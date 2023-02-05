@@ -13,10 +13,12 @@ import android.view.ViewGroup;
 
 import com.basetechz.quizo.databinding.FragmentExploreBinding;
 import com.basetechz.quizo.databinding.FragmentExploreBinding;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -40,6 +42,7 @@ public class ExploreFragment extends Fragment  {
     LinearLayoutManager layoutManager1;
     LinearLayoutManager layoutManager2;
     RecyclerCategoryAdapter adapter;
+//    topScorerAdapter tsAdapter;
 
 
     @Override
@@ -48,10 +51,9 @@ public class ExploreFragment extends Fragment  {
         binding = FragmentExploreBinding.inflate(inflater,container,false);
         database = FirebaseFirestore.getInstance();
 
+
         // array list for category
         ArrayList<CategoryModel> categories = new ArrayList<>();
-
-
         // Manually set image and text
         // for first index
 //        CategoryModel categoryModel = new CategoryModel("","","Java");
@@ -93,6 +95,9 @@ public class ExploreFragment extends Fragment  {
         adapter = new RecyclerCategoryAdapter(getContext(),categories);
         // categories and context pass in RecyclerCategoryAdapter Constructor
         binding.categoryList2.setAdapter(adapter);
+
+
+
 
         // Inflate the layout for this fragment
         return binding.getRoot();

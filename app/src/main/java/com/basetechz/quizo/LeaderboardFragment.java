@@ -8,12 +8,15 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.basetechz.quizo.databinding.FragmentLeaderboardBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -59,6 +62,7 @@ public class LeaderboardFragment extends Fragment {
         FirebaseAuth mAuth = FirebaseAuth.getInstance();
         FirebaseUser firebaseUser = mAuth.getCurrentUser();
 
+        // In LeaderBoard Ranking base according to number of coins
        database.collection("Users")
                .orderBy("coins",Query.Direction.DESCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
                    @Override
@@ -68,6 +72,20 @@ public class LeaderboardFragment extends Fragment {
                            uArrayList.add(user);
                        }
                        adapter.notifyDataSetChanged();
+                   }
+               });
+
+       // storage all total all team member
+       database.collection("Users")
+               .get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                   @Override
+                   public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                       if(task.isSuccessful()){
+                           long userCount = task.getResult().size();
+                           binding.count.setText("All Team ("+userCount+")");
+                       }else {
+                           Log.d("Firestore","Error getting user count:",task.getException());
+                       }
                    }
                });
 

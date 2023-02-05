@@ -195,9 +195,9 @@ public class SignUpActivity extends AppCompatActivity {
                                             user1 = mAuth.getCurrentUser();
 
                                             User firebaseUser = new User(name.getText().toString(),personEmail,personPass,uri.toString(),coins);
-                                           String uid = task.getResult().getUser().getUid();
+                                            String uid = task.getResult().getUser().getUid();
 
-                                           database.collection("Users")
+                                            database.collection("Users")
                                                    .document(uid).set(firebaseUser).addOnCompleteListener(new OnCompleteListener<Void>() {
                                                        @Override
                                                        public void onComplete(@NonNull Task<Void> task) {
@@ -208,7 +208,6 @@ public class SignUpActivity extends AppCompatActivity {
                                                    });
                                         }
                                     });
-
                                 }
                             })
                             .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
@@ -223,11 +222,8 @@ public class SignUpActivity extends AppCompatActivity {
                     dialog.dismiss();
                     Toast.makeText(SignUpActivity.this, task.getException().getLocalizedMessage(),Toast.LENGTH_SHORT).show();
                 }
-
             }
         });
-
-
     }
 
 }

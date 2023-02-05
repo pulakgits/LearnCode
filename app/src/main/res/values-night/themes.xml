@@ -109,7 +109,11 @@
     <style name="forward_icon">
         <item name="android:background">@drawable/forward_icon_dark_mode</item>
     </style>
-
+    <style name="textAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">@dimen/_13sdp</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
 
 
 

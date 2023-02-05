@@ -30,7 +30,7 @@
         <item name="android:background">@drawable/home_icons_select</item>
     </style>
     <style name="toolBar">
-        <item name="android:background">@drawable/background</item>
+        <item name="android:background">@drawable/course_card_bg</item>
     </style>
     <style name="itemCategory">
         <item name="android:background">@color/white</item>
@@ -118,6 +118,18 @@
     <style name="walletBg">
         <item name="android:background">@drawable/background</item>
     </style>
+
+    <style name="searchBg">
+        <item name="android:background">@drawable/search_light_theme</item>
+    </style>
+
+    <style name="textAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="textAllCaps">false</item>
+        <item name="android:textSize">@dimen/_13sdp</item>
+       <item name="tabTextColor">@color/white</item>
+
+    </style>
+
 
 
 

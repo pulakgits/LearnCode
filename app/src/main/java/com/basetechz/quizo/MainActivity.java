@@ -6,6 +6,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
+import android.hardware.Sensor;
+import android.hardware.SensorEvent;
+import android.hardware.SensorEventListener;
+import android.hardware.SensorManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -28,6 +32,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.basetechz.quizo.Home.HomeFragment;
 import com.basetechz.quizo.databinding.ActivityMainBinding;
 import com.bumptech.glide.Glide;
 //import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -58,8 +63,8 @@ import java.util.Objects;
 public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
     FirebaseAuth auth;
-   FirebaseFirestore database;
-   FirebaseDatabase db;
+    FirebaseFirestore database;
+    FirebaseDatabase db;
     boolean nightMODE;
     SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
@@ -74,7 +79,6 @@ public class MainActivity extends AppCompatActivity {
     TextView email;
     ImageView phoUrl;
     User user;
-
     FirebaseAuth mAuth;
 
     // number of selected tab we have 4 tabs so value must lie between 1-4 ,
@@ -102,11 +106,6 @@ public class MainActivity extends AppCompatActivity {
 
         // set drawableArrow 3 line color
         toggle.getDrawerArrowDrawable().setColor(getResources().getColor(R.color.black));
-
-
-
-
-
 
 
 
@@ -187,6 +186,7 @@ public class MainActivity extends AppCompatActivity {
 
         // set home fragment by default
         // Its a Transaction fragment object
+        loadFragment(new HomeFragment());
         binding.homeTxt.setTextColor(color);
         binding.homeImage.setImageResource(R.drawable.home_icons_select);
         binding.homeLayout.setBackgroundResource(R.drawable.round_back_home_100);
@@ -197,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
             binding.toolBarText.setText("Home");
 
             // set Home Fragment
-
+            loadFragment(new HomeFragment());
 
             // check if home Tab is selected or not
 
@@ -328,7 +328,6 @@ public class MainActivity extends AppCompatActivity {
                 email.setText(personEmail);
                 Glide.with(MainActivity.this).load(user.getImage()).into(phoUrl);
                 binding.coins.setText(String.valueOf(user.getCoins()));
-
             }
 
         });
@@ -346,7 +345,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
     }
+
 
     private void setDisplayHomeAsUpEnabled(boolean b) {
     }
@@ -367,10 +368,6 @@ public class MainActivity extends AppCompatActivity {
         ft.setReorderingAllowed(true);
         ft.commit();
     }
-//     load profile image
-//    void loadProfileImage(){
-//        Glide.with(MainActivity.this).load(user.getImage()).into(binding.profileImage);
-//    }
 }
 
 

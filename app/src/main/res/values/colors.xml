@@ -41,6 +41,8 @@
     <color name="DarkViolet1.0">#191D20</color>
     <color name="DarkViolet2.0">#15181D</color>
     <color name="whiteDark">#9C9C9C</color>
+    <color name="bg">#06AC77</color>
+
 
 
 </resources>

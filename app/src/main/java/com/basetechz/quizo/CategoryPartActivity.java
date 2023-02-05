@@ -50,8 +50,6 @@ public class CategoryPartActivity extends AppCompatActivity {
         //RecyclerCategoryAdapter
 
 
-        
-
         // set Linear Layout Manager
         LinearLayoutManager layoutManagerP = new LinearLayoutManager(CategoryPartActivity.this, LinearLayoutManager.VERTICAL, false);
         binding.categoryListPart.setLayoutManager(layoutManagerP);

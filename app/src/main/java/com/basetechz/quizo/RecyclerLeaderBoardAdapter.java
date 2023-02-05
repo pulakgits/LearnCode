@@ -45,7 +45,7 @@ public class RecyclerLeaderBoardAdapter extends RecyclerView.Adapter<RecyclerLea
         holder.coins.setText(String.valueOf(user.getCoins()));
         Picasso.get().load(user.getImage()).into(holder.img);
         holder.name.setText(user.getName());
-        holder.rank.setText(String.format("#%d",position+1));
+        holder.rank.setText(String.format("%d",position+1));
 
 
     }

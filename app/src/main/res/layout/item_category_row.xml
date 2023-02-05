@@ -4,6 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/_120sdp"
     app:cardCornerRadius="@dimen/_13sdp"
+    app:cardElevation="@dimen/_8sdp"
     style="@style/itemCategory">
 
 
