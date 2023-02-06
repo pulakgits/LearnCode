@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,18 @@ public class LoginActivity extends AppCompatActivity {
         auth = FirebaseAuth.getInstance();
         dialog = new ProgressDialog(this);
         dialog.setMessage("Login Process.....");
+
+
+
+        binding.skipBtn.setAnimation(AnimationUtils.loadAnimation(this,R.anim.top_animation));
+        binding.txt.setAnimation(AnimationUtils.loadAnimation(this,R.anim.buttom_animation));
+        binding.ani.setAnimation(AnimationUtils.loadAnimation(this,R.anim.top_animation));
+        binding.emailBox.setAnimation(AnimationUtils.loadAnimation(this,R.anim.buttom_animation));
+        binding.passwordBox.setAnimation(AnimationUtils.loadAnimation(this,R.anim.top_animation));
+        binding.forgotBtn.setAnimation(AnimationUtils.loadAnimation(this,R.anim.top_animation));
+        binding.sb.setAnimation(AnimationUtils.loadAnimation(this,R.anim.buttom_animation));
+        binding.loginBtn.setAnimation(AnimationUtils.loadAnimation(this,R.anim.top_animation));
+
 
         binding.loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override

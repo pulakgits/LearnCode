@@ -44,12 +44,14 @@
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ani"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center">
 
         <com.airbnb.lottie.LottieAnimationView
+
             android:layout_width="@dimen/_200sdp"
             android:layout_height="@dimen/_200sdp"
             app:layout_constraintEnd_toEndOf="@+id/cardView2"

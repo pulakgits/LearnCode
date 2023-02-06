@@ -17,6 +17,7 @@ import android.provider.MediaStore;
 import android.util.Log;
 import android.view.View;
 import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.view.animation.ScaleAnimation;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -75,9 +76,6 @@ public class SignUpActivity extends AppCompatActivity {
     Bitmap bitmap;
     private final int GALLERY_REQ_CODE=1000;
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,6 +90,14 @@ public class SignUpActivity extends AppCompatActivity {
         database = FirebaseFirestore.getInstance();
         db = FirebaseDatabase.getInstance();
 
+        binding.skipBtn.setAnimation(AnimationUtils.loadAnimation(this,R.anim.buttom_animation));
+        binding.textSample.setAnimation(AnimationUtils.loadAnimation(this,R.anim.top_animation));
+        binding.ani.setAnimation(AnimationUtils.loadAnimation(this,R.anim.buttom_animation));
+        binding.nameBox.setAnimation(AnimationUtils.loadAnimation(this,R.anim.top_animation));
+        binding.emailBox.setAnimation(AnimationUtils.loadAnimation(this,R.anim.buttom_animation));
+        binding.passwordBox.setAnimation(AnimationUtils.loadAnimation(this,R.anim.top_animation));
+        binding.loginLayout.setAnimation(AnimationUtils.loadAnimation(this,R.anim.buttom_animation));
+        binding.SignUpBtn.setAnimation(AnimationUtils.loadAnimation(this,R.anim.top_animation));
 
         img = findViewById(R.id.addPhotoProfile);
 

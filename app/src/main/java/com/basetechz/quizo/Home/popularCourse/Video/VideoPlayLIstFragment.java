@@ -71,11 +71,6 @@ public class VideoPlayLIstFragment extends Fragment {
                     }
                 });
 
-
-
-
-
-
         adapter = new RecyclerPCLessonAdapter(getContext(),lModelArrayList,courseId);
         binding.videoRecycler.setAdapter(adapter);
 
