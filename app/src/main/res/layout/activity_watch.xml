@@ -9,8 +9,15 @@
         android:id="@+id/player"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="@color/black"
         app:use_controller="true"
         app:controller_layout_id="@layout/custom_controller"/>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_centerInParent="true" />
 
 
 </RelativeLayout>

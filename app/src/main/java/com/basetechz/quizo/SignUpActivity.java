@@ -101,7 +101,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         img = findViewById(R.id.addPhotoProfile);
 
-// mobile external storage pic access
+        // mobile external storage pic access
         img.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -112,12 +112,11 @@ public class SignUpActivity extends AppCompatActivity {
                 });
 
 
+        // When Click SignUpBtn
         binding.SignUpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 uploadToFirebase();
-
             }
         });
 
@@ -139,9 +138,6 @@ public class SignUpActivity extends AppCompatActivity {
 
     }
 
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -155,13 +151,12 @@ public class SignUpActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         if(requestCode == GALLERY_REQ_CODE && resultCode == RESULT_OK){
+            assert data != null;
             filepath = data.getData();
             try {
-
                 InputStream inputStream = getContentResolver().openInputStream(filepath);
                 bitmap = BitmapFactory.decodeStream(inputStream);
                 img.setImageBitmap(bitmap);
-
             }catch (Exception ex){
 
             }
@@ -169,8 +164,8 @@ public class SignUpActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+    // Upload Image into Firebase
     private void uploadToFirebase() {
-
         dialog.setTitle("File Uploader");
         dialog.show();
         name = findViewById(R.id.nameBox);

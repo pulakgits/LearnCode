@@ -1,7 +1,9 @@
 package com.basetechz.quizo.Home;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -49,7 +51,7 @@ public class HomeFragment extends Fragment {
     RecyclerPopularCourseAdapter adapterPopularCourse;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater,container,false);
 
@@ -68,16 +70,17 @@ public class HomeFragment extends Fragment {
 
 
 
-      database.collection("popularCourse").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+      database.collection("popularCourse").orderBy("courseId", Query.Direction.ASCENDING).get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
+          @SuppressLint("NotifyDataSetChanged")
           @Override
           public void onSuccess(QuerySnapshot queryDocumentSnapshots) {
               for(DocumentSnapshot snapshot : queryDocumentSnapshots){
                   PopularCourseModel pcm = snapshot.toObject(PopularCourseModel.class);
+                  assert pcm != null;
                   pcm.setCourseId(snapshot.getId());
                   pcmArrayList.add(pcm);
               }
               adapterPopularCourse.notifyDataSetChanged();
-
           }
       });
             adapterPopularCourse = new RecyclerPopularCourseAdapter(getContext(),pcmArrayList);
