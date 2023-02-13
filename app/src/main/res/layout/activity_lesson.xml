@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".LessonActivity">
+    tools:context=".Home.popularCourse.LessonActivity">
 
     <RelativeLayout
     android:layout_width="match_parent"
@@ -37,6 +37,7 @@
             android:textSize="@dimen/_15sdp" />
 
         <ImageView
+            android:id="@+id/shareButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"

@@ -2,6 +2,7 @@ package com.basetechz.quizo.Home.popularCourse.Video;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -14,6 +15,9 @@ import android.view.ViewGroup;
 import com.basetechz.quizo.Home.popularCourse.Video.LessonModel;
 import com.basetechz.quizo.Home.popularCourse.Video.RecyclerPCLessonAdapter;
 import com.basetechz.quizo.databinding.FragmentVideoPlayLIstBinding;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,6 +46,8 @@ public class VideoPlayLIstFragment extends Fragment {
     FragmentVideoPlayLIstBinding binding;
     FirebaseFirestore database;
     RecyclerPCLessonAdapter adapter;
+    LessonModel lessonModel;
+    long views = 0;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,13 +63,14 @@ public class VideoPlayLIstFragment extends Fragment {
 
         ArrayList<LessonModel> lModelArrayList = new ArrayList<>();
 
+        // retrieve data from firebase firestore
         database.collection("popularCourse").document(courseId).collection("video").orderBy("videoLessonId", Query.Direction.ASCENDING)
                 .addSnapshotListener(new EventListener<QuerySnapshot>() {
                     @Override
                     public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                         lModelArrayList.clear();
                         for(DocumentSnapshot snapshot : value.getDocuments()){
-                            LessonModel lessonModel = snapshot.toObject(LessonModel.class);
+                            lessonModel = snapshot.toObject(LessonModel.class);
                             lessonModel.setVideoLessonId(snapshot.getId());
                             lModelArrayList.add(lessonModel);
                         }

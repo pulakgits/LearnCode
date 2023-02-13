@@ -5,6 +5,12 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
+    <queries>
+        <intent>
+            <action android:name="com.google.android.youtube.api.service.START"/>
+        </intent>
+    </queries>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -14,16 +20,30 @@
         android:theme="@style/NightMode"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".WatchActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen"
-            android:configChanges="orientation|screenSize|screenLayout"
-            android:exported="true">
+            android:name=".editActivity"
+            android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".LessonActivity"
+            android:name=".ProfileActivity"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".WatchActivity"
+            android:configChanges="orientation|screenSize|screenLayout"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar.FullScreen">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".Home.popularCourse.LessonActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
@@ -73,13 +93,11 @@
         <activity
             android:name=".SplashScreen"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity> <!-- <service android:name=".PushNotificationService" android:exported="false"> -->
         <!-- <intent-filter> -->
         <!-- <action android:name="com.google.firebase.MESSAGING_EVENT"> </action> -->

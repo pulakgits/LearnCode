@@ -26,6 +26,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.appcompat.graphics.drawable.DrawerArrowDrawable;
+import androidx.appcompat.widget.SearchView;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
@@ -33,6 +34,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.basetechz.quizo.Home.HomeFragment;
+import com.basetechz.quizo.Home.popularCourse.RecyclerPopularCourseAdapter;
 import com.basetechz.quizo.databinding.ActivityMainBinding;
 import com.bumptech.glide.Glide;
 //import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -80,6 +82,9 @@ public class MainActivity extends AppCompatActivity {
     ImageView phoUrl;
     User user;
     FirebaseAuth mAuth;
+
+
+    RecyclerPopularCourseAdapter adapter;
 
     // number of selected tab we have 4 tabs so value must lie between 1-4 ,
     // default value is 1 because first tab selected by default.
@@ -208,7 +213,7 @@ public class MainActivity extends AppCompatActivity {
             binding.leadTxt.setTextColor(txtColor);
             binding.exploreImage.setImageResource(R.drawable.explore_icon);
             binding.exploreTxt.setTextColor(txtColor);
-
+            binding.profileImage.setImageResource(R.drawable.profile_iconn);
             binding.profileTxt.setTextColor(txtColor);
 
             for (LinearLayout linearLayout : Arrays.asList(binding.leadLayout, binding.exploreLayout, binding.profileLayout))
@@ -238,7 +243,7 @@ public class MainActivity extends AppCompatActivity {
             binding.homeTxt.setTextColor(txtColor);
             binding.exploreImage.setImageResource(R.drawable.explore_icon);
             binding.exploreTxt.setTextColor(txtColor);
-
+            binding.profileImage.setImageResource(R.drawable.profile_iconn);
             binding.profileTxt.setTextColor(txtColor);
 
             binding.homeLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
@@ -270,7 +275,7 @@ public class MainActivity extends AppCompatActivity {
                 binding.homeTxt.setTextColor(txtColor);
                 binding.leadImage.setImageResource(R.drawable.leadboard_icon);
                 binding.leadTxt.setTextColor(txtColor);
-
+                binding.profileImage.setImageResource(R.drawable.profile_iconn);
                 binding.profileTxt.setTextColor(txtColor);
 
                 binding.homeLayout.setBackgroundColor(getResources().getColor(android.R.color.transparent));
@@ -288,12 +293,11 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 binding.toolBarText.setText("Profile");
-                //set Profile Fragment
-                loadFragment(new ProfileFragment());
+
+                Intent intent = new Intent(MainActivity.this,ProfileActivity.class);
+                startActivity(intent);
 
                 // unselect other tab except home tab
-
-
                 binding.homeImage.setImageResource(R.drawable.home_icons);
                 binding.homeTxt.setTextColor(txtColor);
                 binding.leadImage.setImageResource(R.drawable.leadboard_icon);
@@ -307,6 +311,7 @@ public class MainActivity extends AppCompatActivity {
 
 
                 binding.profileTxt.setTextColor(color);
+                binding.profileImage.setImageResource(R.drawable.profile_iconn_select);
                 binding.profileLayout.setBackgroundResource(R.drawable.round_back_profile_100);
 
             }
@@ -345,6 +350,21 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+//        // action_search
+//        binding.actionSearch.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//
+//                adapter.fi
+//                return false;
+//            }
+//        });
 
     }
 

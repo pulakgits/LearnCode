@@ -11,7 +11,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.basetechz.quizo.LessonActivity;
 import com.basetechz.quizo.R;
 import com.squareup.picasso.Picasso;
 

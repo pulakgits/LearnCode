@@ -29,6 +29,7 @@ import java.util.Map;
 public class ResultActivity extends AppCompatActivity {
     ActivityResultBinding binding;
     int points = 0;
+
     FirebaseDatabase database;
     FirebaseFirestore db;
     FirebaseAuth mAuth;
@@ -47,7 +48,7 @@ public class ResultActivity extends AppCompatActivity {
         int correctAnswers = getIntent().getIntExtra("correct",0);
         int totalQuestions = getIntent().getIntExtra("total question",0);
 
-        long points = correctAnswers*10;
+        long points = correctAnswers;
 
         binding.score.setText(String.format("%d/%d",correctAnswers,totalQuestions));
         binding.earnedCoined.setText(String.valueOf(points));

@@ -2,11 +2,21 @@ package com.basetechz.quizo;
 
 import android.net.Uri;
 
+import com.google.firebase.firestore.SetOptions;
+
 public class User {
     private String name,email,pass,image;
     private long coins;
+    private String phoneNumber,state;
+    SetOptions merge;
 
     public User(){
+
+    }
+    public User(String name,String email,String pass){
+        this.name = name;
+        this.email = email;
+        this.pass = pass;
 
     }
 
@@ -19,7 +29,16 @@ public class User {
 
     }
 
+    public User(String name, String email, String pass , String phoneNumber , String state, SetOptions merge) {
+        this.name= name;
+        this.email = email;
+        this.pass = pass;
+        this.phoneNumber = phoneNumber;
+        this.state = state;
+        this.merge = merge;
 
+
+    }
 
 
     public String getName() {
@@ -62,5 +81,21 @@ public class User {
 
     public void setCoins(long coins) {
         this.coins = coins;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
     }
 }

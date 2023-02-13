@@ -25,6 +25,7 @@
                 android:layout_gravity="center"
                 android:padding="@dimen/_5sdp"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/toolBarText"
                     android:layout_width="wrap_content"
@@ -176,12 +177,6 @@
                 android:paddingStart="@dimen/_4sdp"
                 android:paddingEnd="@dimen/_4sdp">
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    app:cardCornerRadius="@dimen/_100sdp">
 
                     <ImageView
                         android:id="@+id/profileImage"
@@ -190,7 +185,6 @@
                         android:background="@drawable/profile_iconn"
                         android:contentDescription="TODO" />
 
-                </androidx.cardview.widget.CardView>
 
 
 
