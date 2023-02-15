@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -12,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.basetechz.quizo.R;
+import com.basetechz.quizo.RecyclerLeaderBoardAdapter;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -23,6 +26,11 @@ public class RecyclerPopularCourseAdapter extends RecyclerView.Adapter<RecyclerP
    public RecyclerPopularCourseAdapter(Context context, ArrayList<PopularCourseModel> pcmArrayList){
        this.context = context;
        this.pcmArrayList = pcmArrayList;
+   }
+
+   public void setFilteredList(ArrayList<PopularCourseModel> filteredList){
+       this.pcmArrayList = filteredList;
+       notifyDataSetChanged();
    }
 
     @NonNull
@@ -41,6 +49,9 @@ public class RecyclerPopularCourseAdapter extends RecyclerView.Adapter<RecyclerP
         holder.courseName.setText(pcModel.getCourseName());
         holder.courseLesson.setText(pcModel.getCourseLesson());
         holder.courseStar.setText(pcModel.getCourseStar());
+
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.item_animation);
+        holder.itemView.startAnimation(animation);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,5 +85,11 @@ public class RecyclerPopularCourseAdapter extends RecyclerView.Adapter<RecyclerP
             courseStar = itemView.findViewById(R.id.courseStar);
 
         }
+    }
+
+    @Override
+    public void onViewRecycled(@NonNull ViewHolder holder) {
+        super.onViewRecycled(holder);
+        holder.itemView.clearAnimation();
     }
 }

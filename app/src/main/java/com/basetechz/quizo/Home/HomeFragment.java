@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -13,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.basetechz.quizo.GridSpacingItemDecoration;
 import com.basetechz.quizo.Home.popularCourse.PopularCourseModel;
@@ -46,23 +48,35 @@ public class HomeFragment extends Fragment {
     FragmentHomeBinding binding;
     FirebaseFirestore database;
     LinearLayoutManager layoutManagerPCourse;
-
-
     RecyclerPopularCourseAdapter adapterPopularCourse;
+    ArrayList<PopularCourseModel> pcmArrayList;
+
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         binding = FragmentHomeBinding.inflate(inflater,container,false);
 
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filerList(newText);
+                return true;
+            }
+        });
+
         database = FirebaseFirestore.getInstance();
 
-
-        
         // set Popular course card and adapter and array list
 
         // create array list for popular course
-        ArrayList<PopularCourseModel> pcmArrayList = new ArrayList<>();
+         pcmArrayList = new ArrayList<>();
 
         // set Layout manager and handel
       LinearLayoutManager layoutManagerPC = new LinearLayoutManager(getContext(),RecyclerView.VERTICAL,false);
@@ -87,20 +101,20 @@ public class HomeFragment extends Fragment {
             binding.popularCourse.setAdapter(adapterPopularCourse);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         return binding.getRoot();
+    }
+
+    private void filerList(String newText) {
+        ArrayList<PopularCourseModel> filteredList = new ArrayList<>();
+        for(PopularCourseModel item : pcmArrayList){
+           if(item.getCourseName().toLowerCase().contains(newText.toLowerCase())){
+               filteredList.add(item);
+           }
+        }
+        if(filteredList.isEmpty()){
+            Toast.makeText(getContext(),"No found data",Toast.LENGTH_SHORT).show();
+        }else{
+            adapterPopularCourse.setFilteredList(filteredList);
+        }
     }
 }

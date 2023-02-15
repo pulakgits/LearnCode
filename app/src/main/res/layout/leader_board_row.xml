@@ -18,6 +18,7 @@
         android:layout_marginBottom="0dp"
         android:baselineAligned="false"
         android:elevation="@dimen/_5sdp"
+        android:padding="@dimen/_5sdp"
         android:gravity="center"
         android:orientation="horizontal"
         android:weightSum="4">

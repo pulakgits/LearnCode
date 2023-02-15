@@ -16,6 +16,7 @@
         android:layout_height="match_parent">
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolBar"
+            style="@style/toolBar"
             android:layout_width="match_parent"
             android:background="@color/grey"
             android:layout_height="@dimen/_45sdp">
@@ -24,6 +25,7 @@
                 android:layout_height="@dimen/_45sdp"
                 android:layout_gravity="center"
                 android:padding="@dimen/_5sdp"
+
                 android:orientation="horizontal">
 
                 <TextView

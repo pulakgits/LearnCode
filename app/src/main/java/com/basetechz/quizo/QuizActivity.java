@@ -36,6 +36,12 @@ public class QuizActivity extends AppCompatActivity {
 
     MediaPlayer mediaPlayer;
 
+    TextView option1;
+    TextView option2;
+    TextView option3;
+    TextView option4;
+   private  boolean isClicked=false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,6 +49,11 @@ public class QuizActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         questions = new ArrayList<>();
         database = FirebaseFirestore.getInstance();
+
+        option1 = findViewById(R.id.option_1);
+        option2 = findViewById(R.id.option_2);
+        option3 = findViewById(R.id.option_3);
+        option4 = findViewById(R.id.option_4);
 
 
         Dialog dialog = new Dialog(this);
@@ -128,7 +139,7 @@ public class QuizActivity extends AppCompatActivity {
                     }
                 });
 //
-
+                Click();
 
 
     }
@@ -188,8 +199,6 @@ public class QuizActivity extends AppCompatActivity {
             binding.option3.setText(questionInd.getOption_3());
             binding.option4.setText(questionInd.getOption_4());
         }
-
-
     }
 
 
@@ -213,10 +222,8 @@ public class QuizActivity extends AppCompatActivity {
     void checkAnswer(TextView textView){
         String selectedAnswer = textView.getText().toString();
         if(selectedAnswer.equals(questionInd.getAnswer())){
-
             MediaPlayer mediaPlayer5 = MediaPlayer.create(this,R.raw.correctsound);
             mediaPlayer5.start();
-
             // for counter correctAnswers
             correctAnswers++;
             textView.setBackgroundResource(R.drawable.option_right);
@@ -227,18 +234,18 @@ public class QuizActivity extends AppCompatActivity {
             showAnswer();
         }
     }
-//
+
 //    // Reset Method
 //    // Option background unselected
-//
     void reset1(){
+        isClicked=false;
         binding.option1.setBackgroundResource(R.drawable.option_outline);
         binding.option2.setBackgroundResource(R.drawable.option_outline);
         binding.option3.setBackgroundResource(R.drawable.option_outline);
         binding.option4.setBackgroundResource(R.drawable.option_outline);
     }
-
     void reset2(){
+        isClicked=false;
         binding.option1.setBackgroundResource(R.drawable.option_outline_darkmode);
         binding.option2.setBackgroundResource(R.drawable.option_outline_darkmode);
         binding.option3.setBackgroundResource(R.drawable.option_outline_darkmode);
@@ -246,46 +253,109 @@ public class QuizActivity extends AppCompatActivity {
     }
 
 
+void Click(){
+       binding.option1.setOnClickListener(new View.OnClickListener() {
+           @Override
+           public void onClick(View view) {
+               if(!isClicked)
+               {
+                   checkAnswer(binding.option1);
+                   if(timer!=null)
+                       timer.cancel();
+                   isClicked=true;
+               }
+
+           }
+       });
+    binding.option2.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(!isClicked)
+            {
+                checkAnswer(binding.option2);
+                if(timer!=null)
+                    timer.cancel();
+                isClicked=true;
+            }
+
+        }
+    });
+    binding.option3.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(!isClicked)
+            {
+                checkAnswer(binding.option3);
+                if(timer!=null)
+                    timer.cancel();
+                isClicked=true;
+            }
+        }
+    });
+    binding.option4.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            if(!isClicked)
+            {
+                checkAnswer(binding.option4);
+                if(timer!=null)
+                    timer.cancel();
+                isClicked=true;
+            }
+        }
+    });
+    binding.nextBtn.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            MediaPlayer mediaPlayer4 = MediaPlayer.create(QuizActivity.this,R.raw.gamesoundi);
+            mediaPlayer4.start();
+            // when click next button reset method start
+            // reset method use for background unselected
+            reset2();
+            reset1();
+
+            // Next question when press NextBtn
+            index++;
+            if(questions.size()>index){
+                setNextQuestion();
+            }else{
+                Intent intent = new Intent(QuizActivity.this,ResultActivity.class);
+                intent.putExtra("correct",correctAnswers);
+                intent.putExtra("total question",questions.size());
+                startActivity(intent);
+                finish();
+            }
+        }
+    });
+}
 
 
 
     @SuppressLint("NonConstantResourceId")
     public void onClick(View view) throws InterruptedException {
         switch (view.getId()){
+
             case R.id.option_1:
             case R.id.option_2:
             case R.id.option_3:
             case R.id.option_4:
 
-                // if one index question selected timer is off
-                if(timer!=null)
-                    timer.cancel();
-                // when user click option selected variable is pass on check Answer method
-                // checkAnswer method check answer is right or wrong
+
                 TextView selected = (TextView)view;
                 checkAnswer(selected);
+
+                if(timer!=null)
+                    timer.cancel();
                 break;
 
 
-             case R.id.nextBtn:
-                 MediaPlayer mediaPlayer4 = MediaPlayer.create(this,R.raw.gamesoundi);
-                 mediaPlayer4.start();
-                 // when click next button reset method start
-                 // reset method use for background unselected
-                 reset2();
-                 reset1();
+                // if one index question selected timer is off
 
-                // Next question when press NextBtn
-                 index++;
-                 if(questions.size()>index){
-                     setNextQuestion();
-                 }else{
-                     Intent intent = new Intent(QuizActivity.this,ResultActivity.class);
-                     intent.putExtra("correct",correctAnswers);
-                     intent.putExtra("total question",questions.size());
-                     startActivity(intent);
-                     finish();
-                 }
+                // when user click option selected variable is pass on check Answer method
+                // checkAnswer method check answer is right or wrong
+
+             case R.id.nextBtn:
+
 
         }
     }

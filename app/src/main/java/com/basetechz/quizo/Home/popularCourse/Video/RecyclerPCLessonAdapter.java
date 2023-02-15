@@ -171,7 +171,7 @@ public class RecyclerPCLessonAdapter extends RecyclerView.Adapter<RecyclerPCLess
 
                 intent.putExtra("viewCount",formattedViewCount);
 
-                intent.putExtra("likes",model.getLike());
+//                intent.putExtra("likes",model.getLike());
                 context.startActivity(intent);
             }
         });

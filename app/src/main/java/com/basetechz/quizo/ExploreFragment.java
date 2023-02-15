@@ -3,6 +3,7 @@ package com.basetechz.quizo;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,10 +11,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.basetechz.quizo.databinding.FragmentExploreBinding;
 import com.basetechz.quizo.databinding.FragmentExploreBinding;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.tabs.TabLayout;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -42,6 +45,7 @@ public class ExploreFragment extends Fragment  {
     LinearLayoutManager layoutManager1;
     LinearLayoutManager layoutManager2;
     RecyclerCategoryAdapter adapter;
+    ArrayList<CategoryModel> categories;
 //    topScorerAdapter tsAdapter;
 
 
@@ -51,9 +55,22 @@ public class ExploreFragment extends Fragment  {
         binding = FragmentExploreBinding.inflate(inflater,container,false);
         database = FirebaseFirestore.getInstance();
 
+        binding.searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                filterList(newText);
+                return true;
+            }
+        });
+
 
         // array list for category
-        ArrayList<CategoryModel> categories = new ArrayList<>();
+       categories = new ArrayList<>();
         // Manually set image and text
         // for first index
 //        CategoryModel categoryModel = new CategoryModel("","","Java");
@@ -101,6 +118,21 @@ public class ExploreFragment extends Fragment  {
 
         // Inflate the layout for this fragment
         return binding.getRoot();
+    }
+
+    private void filterList(String newText) {
+        ArrayList<CategoryModel> filteredList = new ArrayList<>();
+        for(CategoryModel item : categories ){
+            if(item.getCategoryName().toLowerCase().contains(newText.toLowerCase())){
+                filteredList.add(item);
+            }
+
+        }
+        if(filteredList.isEmpty()){
+            Toast.makeText(getContext(),"data not found", Toast.LENGTH_SHORT).show();
+        }else {
+            adapter.setFilteredList(filteredList);
+        }
     }
 }
 

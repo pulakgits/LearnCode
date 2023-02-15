@@ -138,7 +138,6 @@ public class WatchActivity extends YouTubeBaseActivity {
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                  model= documentSnapshot.toObject(LessonModel.class);
 
-
                 if (model.getViewCount()< 1000) {
                     formattedViewCount = String.valueOf(model.getViewCount());
                 } else if (model.getViewCount() < 10000) {
@@ -153,17 +152,11 @@ public class WatchActivity extends YouTubeBaseActivity {
                     formattedViewCount = String.valueOf(model.getViewCount()/ 1000000000) + "B";
                 }
 
-//                String viewCount = getIntent().getStringExtra("viewCount");
                 binding.viewsCount.setText(String.valueOf(formattedViewCount));
-
             }
         });
 
 
-
-
-
-        long  likes = getIntent().getLongExtra("likes",0);
 
         // Like Count
         binding.likeBtn.setOnClickListener(new View.OnClickListener() {
@@ -198,10 +191,6 @@ public class WatchActivity extends YouTubeBaseActivity {
                             });
                 }
                 isLike = !isLike;
-
-
-
-
             }
         });
 

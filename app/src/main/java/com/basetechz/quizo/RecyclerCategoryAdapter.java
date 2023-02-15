@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -25,6 +27,12 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter<RecyclerCatego
     RecyclerCategoryAdapter(Context context,ArrayList<CategoryModel> categories){
         this.context = context;
         this.categories=categories;
+    }
+
+    public void setFilteredList(ArrayList<CategoryModel> filteredList){
+        this.categories = filteredList;
+        notifyDataSetChanged();
+
     }
 
 
@@ -52,6 +60,9 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter<RecyclerCatego
         categoryImage = categoryModel.getCategoryImage();
         Picasso.get().load(categoryImage).into(holder.imgCategory);
         holder.txtCategory.setText(categoryModel.getCategoryName());
+
+        Animation animation = AnimationUtils.loadAnimation(context, R.anim.item_animation);
+        holder.itemView.startAnimation(animation);
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -82,5 +93,12 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter<RecyclerCatego
 
         }
     }
+
+    @Override
+    public void onViewRecycled(@NonNull ViewHolder holder) {
+        super.onViewRecycled(holder);
+        holder.itemView.clearAnimation();
+    }
+
 
 }

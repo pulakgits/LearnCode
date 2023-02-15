@@ -1,7 +1,5 @@
 package com.basetechz.quizo;
 
-import android.net.Uri;
-
 import com.google.firebase.firestore.SetOptions;
 
 public class User {
@@ -9,6 +7,8 @@ public class User {
     private long coins;
     private String phoneNumber,state;
     SetOptions merge;
+    private String  UserId;
+
 
     public User(){
 
@@ -20,7 +20,7 @@ public class User {
 
     }
 
-    public User(String name,String email,String pass,String image,long coins){
+    public User(String name, String email, String pass, String image, long coins ){
         this.name = name;
         this.email = email;
         this.pass=pass;
@@ -36,9 +36,9 @@ public class User {
         this.phoneNumber = phoneNumber;
         this.state = state;
         this.merge = merge;
-
-
     }
+
+
 
 
     public String getName() {
@@ -97,5 +97,14 @@ public class User {
 
     public void setState(String state) {
         this.state = state;
+    }
+
+
+    public String getUserId() {
+        return UserId;
+    }
+
+    public void setUserId(String userId) {
+        UserId = userId;
     }
 }
