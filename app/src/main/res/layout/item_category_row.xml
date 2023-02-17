@@ -5,6 +5,7 @@
     android:layout_height="@dimen/_120sdp"
     app:cardCornerRadius="@dimen/_13sdp"
     app:cardElevation="@dimen/_8sdp"
+    android:background="?selectableItemBackground"
     style="@style/itemCategory">
 
 
@@ -12,6 +13,7 @@
         style="@style/itemCategory"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:background="?selectableItemBackground"
         android:layout_gravity="center"
         android:orientation="vertical">
 
@@ -20,6 +22,7 @@
             style="@style/itemCategory"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_90sdp"
+            android:background="?selectableItemBackground"
             android:layout_gravity="center"
             android:gravity="center">
 
