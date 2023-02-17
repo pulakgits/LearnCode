@@ -1,33 +1,19 @@
 package com.basetechz.quizo;
 
-import static androidx.fragment.app.FragmentManager.TAG;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
-import android.app.Dialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
-import android.widget.MultiAutoCompleteTextView;
-import android.widget.Spinner;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.basetechz.quizo.databinding.ActivityProfileBinding;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
 import com.squareup.picasso.Picasso;
-
-import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity {
     ActivityProfileBinding binding;
@@ -58,6 +44,9 @@ public class ProfileActivity extends AppCompatActivity {
                         binding.nameBox.setText(user.getName());
                         binding.passBox.setText(user.getPass());
                         binding.state.setText(user.getState());
+
+                        assert binding.userCoin != null;
+                        binding.userCoin.setText(String.valueOf(user.getCoins()));
                     }
                 });
 

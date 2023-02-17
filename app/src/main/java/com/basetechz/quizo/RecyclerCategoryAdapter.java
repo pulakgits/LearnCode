@@ -13,7 +13,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -82,16 +81,17 @@ public class RecyclerCategoryAdapter extends RecyclerView.Adapter<RecyclerCatego
         return categories.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView txtCategory;
         ImageView imgCategory;
-        public ViewHolder(View itemView){
+
+        public ViewHolder(View itemView) {
             super(itemView);
             txtCategory = itemView.findViewById(R.id.txtCategory);
             imgCategory = itemView.findViewById(R.id.imgCategory);
 
-
         }
+
     }
 
     @Override

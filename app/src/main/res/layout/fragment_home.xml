@@ -4,7 +4,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    style="@style/mainBg"
     tools:context=".Home.HomeFragment">
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
@@ -17,13 +16,12 @@
                 android:id="@+id/searchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                style="@style/itemCatTxt"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_marginLeft="@dimen/_10sdp"
                 app:iconifiedByDefault="false"
                 app:queryHint="Search Course"
-                android:background="@drawable/search_view_bg"/>
+                style="@style/search" />
 
 
 
