@@ -5,128 +5,86 @@
    android:layout_marginTop="@dimen/_7sdp"
     android:layout_marginBottom="@dimen/_7sdp"
     android:layout_marginLeft="@dimen/_5sdp"
+    android:background="?selectableItemBackground"
     android:layout_marginRight="@dimen/_5sdp"
     app:cardCornerRadius="@dimen/_10sdp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/navView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="0dp"
-        android:baselineAligned="false"
+        android:background="?selectableItemBackground"
         android:elevation="@dimen/_5sdp"
-        android:padding="@dimen/_5sdp"
         android:gravity="center"
         android:orientation="horizontal"
+        android:padding="@dimen/_5sdp"
         android:weightSum="4">
 
-
-        <LinearLayout
-            android:id="@+id/exploreLayout"
-            android:layout_width="@dimen/_70sdp"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/imgCard"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:background="?selectableItemBackground"
+            app:cardCornerRadius="@dimen/_100sdp">
 
-            android:orientation="vertical"
-            android:paddingStart="@dimen/_4sdp"
-            android:paddingEnd="@dimen/_4sdp">
-
-            <androidx.cardview.widget.CardView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="@dimen/_100sdp">
-
-                <ImageView
-                    android:id="@+id/personImg"
-                    android:layout_width="@dimen/_50sdp"
-                    android:layout_height="@dimen/_50sdp"
-                    android:contentDescription="@string/todoooo" />
+            <ImageView
+                android:id="@+id/personImg"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:contentDescription="@string/todoooo" />
 
 
-            </androidx.cardview.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
 
-        </LinearLayout>
-        <LinearLayout
-            android:id="@+id/leadLayout"
-            android:layout_width="139dp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_weight="1.2"
-            android:background="@android:color/transparent"
-            android:orientation="vertical"
-            android:gravity="center_vertical"
-            android:paddingStart="@dimen/_4sdp"
-            android:paddingEnd="@dimen/_4sdp">
+        <TextView
+            android:id="@+id/personName"
+            style="@style/itemCatTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/imgCard"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_55sdp"
+            android:fontFamily="@font/roboto_bold"
+            android:text="@string/user_name"
+            android:textSize="@dimen/_13sdp" />
 
 
-            <TextView
-                android:id="@+id/personName"
-                style="@style/itemCatTxt"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-
-                android:fontFamily="@font/roboto_bold"
-                android:text="@string/user_name"
-                android:textSize="@dimen/_13sdp" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/homeLayout"
-            android:layout_width="53dp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_weight="0.4"
-            android:gravity="center_vertical"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/_4sdp"
-            android:paddingEnd="@dimen/_4sdp">
-
-
-            <TextView
-                android:id="@+id/personRank"
-                style="@style/txtNavigation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:text="#1"
-                android:textColor="#13AE19"
-                android:textSize="@dimen/_13sdp" />
-        </LinearLayout>
-
-
-
-        <LinearLayout
-            android:id="@+id/profileLayout"
-            android:layout_width="108dp"
-            android:layout_height="@dimen/_40sdp"
-            android:layout_weight="1"
-            android:background="@android:color/transparent"
+        <TextView
+            android:id="@+id/personRank"
+            style="@style/txtNavigation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_70sdp"
             android:gravity="center"
-            android:orientation="vertical"
-            android:paddingStart="@dimen/_4sdp"
-            android:paddingEnd="@dimen/_4sdp">
+            android:text="#1"
+            android:textColor="#13AE19"
+            android:textSize="@dimen/_13sdp" />
 
+        <TextView
+            android:id="@+id/personCoins"
+            style="@style/itemCatTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:contentDescription="TODO"
+            android:drawableRight="@drawable/coin"
+            android:gravity="center"
+            android:textSize="@dimen/_13sdp" />
 
-            <TextView
-                android:id="@+id/personCoins"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                style="@style/itemCatTxt"
-                android:textSize="@dimen/_13sdp"
-                android:contentDescription="TODO"
-                android:drawableRight="@drawable/coin" />
-
-
-        </LinearLayout>
-
-
-    </LinearLayout>
+    </RelativeLayout>
 
 
 </LinearLayout>
